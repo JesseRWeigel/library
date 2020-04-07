@@ -16,6 +16,8 @@
 
 // package com.google.zxing.pdf417.decoder;
 
+const BigInt = require('bigint-polyfill');
+
 // import com.google.zxing.FormatException;
 import FormatException from '../../FormatException';
 // import com.google.zxing.common.CharacterSetECI;
