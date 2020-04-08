@@ -16,7 +16,7 @@
 
 // package com.google.zxing.pdf417.decoder;
 
-const BigInt = require('bigint-polyfill');
+import * as BigInt from 'big-integer'
 
 // import com.google.zxing.FormatException;
 import FormatException from '../../FormatException';
@@ -62,6 +62,7 @@ function getEXP900(): BigInt[] {
 
   // in Java - array with length = 16
   for (let i /*int*/ = 2; i < 16; i++) {
+    //@ts-ignore
     EXP900[i] = EXP900[i - 1] * nineHundred;
   }
 
@@ -612,6 +613,7 @@ export default /*final*/ class DecodedBitStreamParser {
                    * JavaScript stores numbers as 64 bits floating point numbers, but all bitwise operations are performed on 32 bits binary numbers.
                    * So the next bitwise operation could not be done with simple numbers
                    */
+                      //@ts-ignore
                   decodedBytes.write(/*(byte)*/Number(BigInt(value) >> BigInt(8 * (5 - j))));
                 }
                 value = 0;
@@ -666,6 +668,7 @@ export default /*final*/ class DecodedBitStreamParser {
              * So the next bitwise operation could not be done with simple numbers
             */
             for (let j /*int*/ = 0; j < 6; ++j) {
+                  //@ts-ignore
               decodedBytes.write(/*(byte)*/Number(BigInt(value) >> BigInt(8 * (5 - j))));
             }
             value = 0;
@@ -772,8 +775,10 @@ export default /*final*/ class DecodedBitStreamParser {
    * @throws FormatException
    */
   private static decodeBase900toBase10(codewords: Int32Array, count: int): string {
+     //@ts-ignore
     let result: bigint = BigInt(0);
     for (let i /*int*/ = 0; i < count; i++) {
+      // @ts-ignore
       result += BigInt(DecodedBitStreamParser.EXP900[count - i - 1]) * BigInt(codewords[i]);
     }
     let resultString: String = result.toString();
