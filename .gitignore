@@ -12,7 +12,6 @@ node_modules/
 
 coverage
 esm
-esm5
 umd
 typings
 
